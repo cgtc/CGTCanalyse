@@ -36,5 +36,8 @@ get_local_importances <- function(fit_object, train_data, target_variable) {
       .groups = "drop"
     )
 
-  return(local_importances_summary)
+  return(list(
+    local_importances_long = local_importances_long,
+    local_importances_summary = local_importances_summary
+  ))
 }
