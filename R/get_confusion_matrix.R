@@ -38,5 +38,5 @@ get_confusion_matrix <- function(fit_object, target_variable) {
   cm_df$True_Class <- factor(cm_df$True_Class)
   cm_df$Predicted_Class <- factor(cm_df$Predicted_Class)
 
-  return(confusion_matrix_df)
+  return(confusion_matrix_df = cm_df)
 }
