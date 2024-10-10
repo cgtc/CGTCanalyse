@@ -14,6 +14,7 @@
 #' @param levels An integer indicating the number of levels in the grid for tuning parameters.
 #' @param v_folds An integer indicating the number of folds to be used in cross-validation.
 #' @param metric A string specifying the metric to be used for model evaluation (e.g., "accuracy").
+#' @param group (Optional) A string representing the name of the grouping variable to use for `group_initial_split`. If not provided, `initial_split` will be used.
 #'
 #' @return A list containing:
 #' \describe{

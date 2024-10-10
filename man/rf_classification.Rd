@@ -41,6 +41,8 @@ rf_classification(
 \item{v_folds}{An integer indicating the number of folds to be used in cross-validation.}
 
 \item{metric}{A string specifying the metric to be used for model evaluation (e.g., "accuracy").}
+
+\item{group}{(Optional) A string representing the name of the grouping variable to use for `group_initial_split`. If not provided, `initial_split` will be used.}
 }
 \value{
 A list containing:
