@@ -99,6 +99,8 @@ rf_classification <- function(data,
 
   return(list(
     best_parameters = best_params,
-    model_metrics = final_fit_metrics
+    model_metrics = final_fit_metrics,
+    final_fit = final_fit,
+    train_data = train_data
   ))
 }
