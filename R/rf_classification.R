@@ -33,13 +33,21 @@ rf_classification <- function(data,
                               min_n_range,
                               levels,
                               v_folds,
-                              metric) {
+                              metric,
+                              group = NULL) {
 
   # Set seed for reproducibility
   set.seed(seed)
 
-  # Split the data into training and testing sets
-  data_split <- initial_split(data, prop = prop, strata = strata)
+  # Split the data into training and testing sets, either by group or regular split
+  if (!is.null(group)) {
+    # Use group_initial_split if group is provided
+    data_split <- group_initial_split(data, prop = prop, group = group)
+  } else {
+    # Use regular initial_split
+    data_split <- initial_split(data, prop = prop, strata = strata)
+  }
+
   train_data <- training(data_split)
   test_data <- testing(data_split)
 

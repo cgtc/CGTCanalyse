@@ -15,7 +15,8 @@ rf_classification(
   min_n_range,
   levels,
   v_folds,
-  metric
+  metric,
+  group = NULL
 )
 }
 \arguments{
