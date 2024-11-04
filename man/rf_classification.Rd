@@ -9,7 +9,7 @@ rf_classification(
   target_variable,
   seed,
   prop,
-  strata,
+  strata = NULL,
   trees,
   mtry_range,
   min_n_range,

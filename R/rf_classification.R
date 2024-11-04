@@ -28,7 +28,7 @@ rf_classification <- function(data,
                               target_variable,
                               seed,
                               prop,
-                              strata,
+                              strata = NULL,
                               trees,
                               mtry_range,
                               min_n_range,
@@ -86,7 +86,11 @@ rf_classification <- function(data,
   )
 
   # Define cross-validation for tuning
-  cv_folds <- vfold_cv(train_data, v = v_folds, strata = strata)
+  if (!is.null(strata)) {
+    cv_folds <- vfold_cv(train_data, v = v_folds, strata = strata)
+  } else {
+    cv_folds <- vfold_cv(train_data, v = v_folds)
+  }
 
   # Tune the model
   tune_results <- tune_grid(
