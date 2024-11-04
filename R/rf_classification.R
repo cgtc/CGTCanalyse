@@ -44,13 +44,16 @@ rf_classification <- function(data,
   if (!is.null(group)) {
     # Use group_initial_split if group is provided
     data_split <- group_initial_split(data, prop = prop, group = group)
+    train_data <- training(data_split) |>
+      select(!group)
+    test_data <- testing(data_split) |>
+      select(!group)
   } else {
     # Use regular initial_split
     data_split <- initial_split(data, prop = prop, strata = strata)
+    train_data <- training(data_split)
+    test_data <- testing(data_split)
   }
-
-  train_data <- training(data_split)
-  test_data <- testing(data_split)
 
   # Create a formula for the recipe
   formula <- as.formula(paste(target_variable, "~ ."))
