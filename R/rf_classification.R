@@ -7,7 +7,7 @@
 #' @param target_variable A string representing the name of the target variable in the dataset.
 #' @param seed An integer to set the random seed for reproducibility.
 #' @param prop A numeric value between 0 and 1 indicating the proportion of data to be used for training.
-#' @param strata A string representing the name of the stratification variable for splitting the data.
+#' @param strata (Optional) A string representing the name of the stratification variable for splitting the data.
 #' @param trees An integer indicating the number of trees to grow in the Random Forest model.
 #' @param mtry_range A numeric vector of length two specifying the range of values for the number of variables to be randomly sampled at each split.
 #' @param min_n_range A numeric vector of length two specifying the range of values for the minimum number of observations required at each node.

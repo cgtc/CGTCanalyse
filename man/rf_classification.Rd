@@ -28,7 +28,7 @@ rf_classification(
 
 \item{prop}{A numeric value between 0 and 1 indicating the proportion of data to be used for training.}
 
-\item{strata}{A string representing the name of the stratification variable for splitting the data.}
+\item{strata}{(Optional) A string representing the name of the stratification variable for splitting the data.}
 
 \item{trees}{An integer indicating the number of trees to grow in the Random Forest model.}
 
