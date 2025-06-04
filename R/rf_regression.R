@@ -51,8 +51,12 @@ rf_regression <- function(data,
   } else {
     # Use regular initial_split
     data_split <- initial_split(data, prop = prop, strata = strata)
-    train_data <- training(data_split)
-    test_data <- testing(data_split)
+
+    drop_vars <- unique(c(strata, group))
+    drop_vars <- setdiff(drop_vars, target_variable)
+
+    train_data <- training(data_split) |> select(-any_of(drop_vars))
+    test_data  <- testing(data_split)  |> select(-any_of(drop_vars))
   }
 
   # Create a formula for the recipe
