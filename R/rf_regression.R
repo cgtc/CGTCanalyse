@@ -51,13 +51,23 @@ rf_regression <- function(data,
   } else {
     # Use regular initial_split
     data_split <- initial_split(data, prop = prop, strata = strata)
-
-    drop_vars <- unique(c(strata, group))
-    drop_vars <- setdiff(drop_vars, target_variable)
-
-    train_data <- training(data_split) |> select(-any_of(drop_vars))
-    test_data  <- testing(data_split)  |> select(-any_of(drop_vars))
   }
+
+  train_data <- training(data_split)
+  test_data  <- testing(data_split)
+
+  # Define cross-validation for tuning
+  if (!is.null(strata)) {
+    cv_folds <- vfold_cv(train_data, v = v_folds, strata = strata)
+  } else {
+    cv_folds <- vfold_cv(train_data, v = v_folds)
+  }
+
+  # Step 3: Drop strata/group columns from modeling data (unless they are the target)
+  drop_vars <- setdiff(unique(c(strata, group)), target_variable)
+
+  train_data <- train_data |> select(-any_of(drop_vars))
+  test_data  <- test_data  |> select(-any_of(drop_vars))
 
   # Create a formula for the recipe
   formula <- as.formula(paste(target_variable, "~ ."))
@@ -88,13 +98,6 @@ rf_regression <- function(data,
     min_n(range = min_n_range),
     levels = levels
   )
-
-  # Define cross-validation for tuning
-  if (!is.null(strata)) {
-    cv_folds <- vfold_cv(train_data, v = v_folds, strata = strata)
-  } else {
-    cv_folds <- vfold_cv(train_data, v = v_folds)
-  }
 
   # Tune the model
   tune_results <- tune_grid(
