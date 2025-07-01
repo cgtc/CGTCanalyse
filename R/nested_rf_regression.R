@@ -66,6 +66,7 @@ nested_rf_regression <- function(data,
                                  min_n_range = c(2, 10),
                                  levels = 5,
                                  outer_folds = 5,
+                                 outer_repeats = 1,
                                  inner_folds = 5,
                                  final_tune_folds = 5,
                                  metric = "rmse",
@@ -76,11 +77,11 @@ nested_rf_regression <- function(data,
 
   message("Creating outer cross-validation splits...")
   if (!is.null(group)) {
-    outer_cv <- group_vfold_cv(data, group = {{group}}, v = outer_folds)
+    outer_cv <- group_vfold_cv(data, group = {{group}}, v = outer_folds, repeats = outer_repeats)
   } else if (!is.null(strata)) {
-    outer_cv <- vfold_cv(data, v = outer_folds, strata = {{strata}})
+    outer_cv <- vfold_cv(data, v = outer_folds, strata = {{strata}}, repeats = outer_repeats)
   } else {
-    outer_cv <- vfold_cv(data, v = outer_folds)
+    outer_cv <- vfold_cv(data, v = outer_folds, repeats = outer_repeats)
   }
 
   outer_results <- map_dfr(outer_cv$splits, function(split) {
