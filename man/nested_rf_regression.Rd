@@ -13,6 +13,7 @@ nested_rf_regression(
   min_n_range = c(2, 10),
   levels = 5,
   outer_folds = 5,
+  outer_repeats = 1,
   inner_folds = 5,
   final_tune_folds = 5,
   metric = "rmse",

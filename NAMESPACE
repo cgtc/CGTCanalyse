@@ -2,6 +2,7 @@
 
 export(get_confusion_matrix)
 export(get_local_importances)
+export(nested_lasso_regression)
 export(nested_rf_regression)
 export(rf_classification)
 export(rf_regression)
